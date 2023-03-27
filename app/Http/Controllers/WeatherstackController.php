@@ -3,17 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Contract\WeatherServiceContract;
-use App\Http\Requests\WeatherRequest;
-use App\Service\WeatherStackService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class WeatherstackController extends Controller
 {
-    public function __construct(private readonly WeatherServiceContract $weatherStackService)
+    public function __construct(private readonly WeatherServiceContract $weatherService)
     {
     }
 
-    public function show($city)
+    /**
+     * @param $city
+     * @return JsonResponse
+     */
+    public function show($city):JsonResponse
     {
-        $currentWeather = $this->weatherStackService->getCityCurrentWeather($city);
+        try {
+            $weather = $this->weatherService->getCityCurrentWeather($city);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['error' => 'Bad request'], 400);
+        }
+
+        return response()->json(['data' => [
+            'current_temperature' => $weather->current->temperature,
+            'real_feel' => $weather->current->feelslike,
+        ]]);
+
     }
 }

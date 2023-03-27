@@ -9,8 +9,6 @@ class WeatherApiService implements \App\Contract\WeatherServiceContract
 
     public function getCityCurrentWeather(string $city)
     {
-//        http://api.weatherapi.com/v1/current.json?key=4183b20f45a04def957221403232603&q=Saint Petersburg&aqi=no
-
         $client = new Client([
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -19,13 +17,13 @@ class WeatherApiService implements \App\Contract\WeatherServiceContract
         ]);
 
         $queryString = http_build_query([
-            'key' => '4183b20f45a04def957221403232603',
-            'q' => $city,
+            'key' => config('weather.api_key'),
+            'q' => htmlspecialchars($city),
+            'aqi' => 'no'
         ]);
 
         $response = $client->get('http://api.weatherapi.com/v1/current.json?' . $queryString);
 
-        return $response->getBody();
-//        dd(2);
+        return json_decode($response->getBody()->getContents());
     }
 }
