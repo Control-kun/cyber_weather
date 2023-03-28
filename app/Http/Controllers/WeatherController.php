@@ -21,9 +21,6 @@ class WeatherController extends Controller
             return response()->json(['error' => 'Bad request'], 400);
         }
 
-        return response()->json(['data' => [
-            'current_temperature' => $weather->current_temperature,
-            'real_feel' => $weather->real_feel,
-        ]]);
+        return response()->json(['data' => $weather]);
     }
 }

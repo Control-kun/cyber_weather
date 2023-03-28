@@ -20,10 +20,11 @@ class WeatherAggregateService
         $weatherStack = $this->weatherStackService->getCityCurrentWeather($city);
 
         $weatherData = [
+            'name' => $weatherApi->city,
             'current_temperature' => ($weatherApi->current_temperature + $weatherStack->current_temperature) / 2,
             'real_feel' => ($weatherApi->real_feel + $weatherStack->real_feel) / 2,
         ];
 
-        return new WeatherData($weatherData['current_temperature'], $weatherData['real_feel']);
+        return new WeatherData($weatherData['name'], $weatherData['current_temperature'], $weatherData['real_feel']);
     }
 }

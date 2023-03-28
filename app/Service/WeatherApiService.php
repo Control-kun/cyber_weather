@@ -26,6 +26,6 @@ class WeatherApiService implements \App\Contract\WeatherServiceContract
 
         $data = json_decode($response->getBody()->getContents());
 
-        return new WeatherData($data->current->temp_c, $data->current->feelslike_c);
+        return new WeatherData($data->location->name,$data->current->temp_c, $data->current->feelslike_c);
     }
 }

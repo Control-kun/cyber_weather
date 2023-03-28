@@ -25,6 +25,6 @@ class WeatherStackService implements \App\Contract\WeatherServiceContract
 
         $data = json_decode($response->getBody()->getContents());
 
-        return new WeatherData($data->current->temperature, $data->current->feelslike);
+        return new WeatherData($data->location->name, $data->current->temperature, $data->current->feelslike);
     }
 }
