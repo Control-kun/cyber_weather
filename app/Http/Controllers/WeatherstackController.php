@@ -25,10 +25,7 @@ class WeatherstackController extends Controller
             return response()->json(['error' => 'Bad request'], 400);
         }
 
-        return response()->json(['data' => [
-            'current_temperature' => $weather->current->temperature,
-            'real_feel' => $weather->current->feelslike,
-        ]]);
+        return response()->json(['data' => $weather]);
 
     }
 }

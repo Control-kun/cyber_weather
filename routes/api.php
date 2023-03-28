@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->group(function () {
     Route::get('/weather-stack/{city}', [\App\Http\Controllers\WeatherstackController::class, 'show']);
     Route::get('/weather-api/{city}', [\App\Http\Controllers\WeatherApiController::class, 'show']);
+    Route::get('/weather-aggregate/{city}', [\App\Http\Controllers\WeatherController::class, 'show']);
 //});
 
 Route::post('/tokens/create', function (Request $request) {

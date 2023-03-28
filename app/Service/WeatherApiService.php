@@ -2,12 +2,12 @@
 
 namespace App\Service;
 
+use App\Data\WeatherData;
 use GuzzleHttp\Client;
 
 class WeatherApiService implements \App\Contract\WeatherServiceContract
 {
-
-    public function getCityCurrentWeather(string $city)
+    public function getCityCurrentWeather(string $city):WeatherData
     {
         $client = new Client([
             'headers' => [
@@ -24,6 +24,8 @@ class WeatherApiService implements \App\Contract\WeatherServiceContract
 
         $response = $client->get('http://api.weatherapi.com/v1/current.json?' . $queryString);
 
-        return json_decode($response->getBody()->getContents());
+        $data = json_decode($response->getBody()->getContents());
+
+        return new WeatherData($data->current->temp_c, $data->current->feelslike_c);
     }
 }

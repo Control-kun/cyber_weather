@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Contract\WeatherServiceContract;
+use App\Service\WeatherAggregateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
-class WeatherApiController extends Controller
+class WeatherController extends Controller
 {
-    public function __construct(public WeatherServiceContract $weatherService)
+    public function __construct(private readonly WeatherAggregateService $weatherService)
     {
     }
 
-    /**
-     * @param $city
-     * @return JsonResponse
-     */
     public function show($city):JsonResponse
     {
         try {
@@ -25,6 +21,9 @@ class WeatherApiController extends Controller
             return response()->json(['error' => 'Bad request'], 400);
         }
 
-        return response()->json(['data' => $weather]);
+        return response()->json(['data' => [
+            'current_temperature' => $weather->current_temperature,
+            'real_feel' => $weather->real_feel,
+        ]]);
     }
 }

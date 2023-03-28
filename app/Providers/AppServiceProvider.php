@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Contract\WeatherServiceContract;
 use App\Http\Controllers\WeatherApiController;
+use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\WeatherstackController;
+use App\Service\WeatherAggregateService;
 use App\Service\WeatherApiService;
 use App\Service\WeatherStackService;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             ->give(function () {
                 return new WeatherStackService();
             });
+
     }
 
     /**

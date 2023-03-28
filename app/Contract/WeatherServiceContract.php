@@ -2,9 +2,9 @@
 
 namespace App\Contract;
 
-use GuzzleHttp\Psr7\Response;
+use App\Data\WeatherData;
 
 interface WeatherServiceContract
 {
-    public function getCityCurrentWeather(string $city);
+    public function getCityCurrentWeather(string $city):WeatherData;
 }
