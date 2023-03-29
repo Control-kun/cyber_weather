@@ -8,7 +8,6 @@ use App\Http\Requests\WeatherRequest;
 use App\Service\WeatherAggregateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
