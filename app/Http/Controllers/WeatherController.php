@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\WeatherServicesEnum;
 use App\Factories\WeatherServiceFactory;
 use App\Http\Requests\WeatherRequest;
 use App\Service\WeatherAggregateService;
@@ -44,5 +45,16 @@ class WeatherController extends Controller
             'current_temperature' => $weather->current_temperature,
             'real_feel' => $weather->real_feel,
         ]]);
+    }
+
+    public function getServicesList():JsonResponse
+    {
+        $serviceListEnums = WeatherServicesEnum::cases();
+
+        foreach ($serviceListEnums as $enum) {
+            $data[] = $enum->name;
+        }
+
+        return response()->json(['data' => $data]);
     }
 }

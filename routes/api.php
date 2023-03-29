@@ -21,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->group(function () {
     Route::get('/weather-aggregate/{city}', [\App\Http\Controllers\WeatherController::class, 'aggregate']);
     Route::get('/weather/{city}', [\App\Http\Controllers\WeatherController::class, 'show']);
+    Route::get('/weather-services', [\App\Http\Controllers\WeatherController::class, 'getServicesList']);
 //});
 
