@@ -9,6 +9,7 @@ use App\Http\Controllers\WeatherstackController;
 use App\Service\WeatherAggregateService;
 use App\Service\WeatherApiService;
 use App\Service\WeatherStackService;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,18 +28,6 @@ class AppServiceProvider extends ServiceProvider
             WeatherServiceContract::class,
             WeatherApiService::class
         );
-
-        $this->app->when(WeatherApiController::class)
-            ->needs(WeatherServiceContract::class)
-            ->give(function () {
-                return new WeatherApiService();
-            });
-
-        $this->app->when(WeatherstackController::class)
-            ->needs(WeatherServiceContract::class)
-            ->give(function () {
-                return new WeatherStackService();
-            });
 
     }
 

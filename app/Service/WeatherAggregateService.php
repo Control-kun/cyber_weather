@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
+use App\Contract\WeatherServiceContract;
 use App\Data\WeatherData;
 
-class WeatherAggregateService
+class WeatherAggregateService implements WeatherServiceContract
 {
 
     public function __construct(
